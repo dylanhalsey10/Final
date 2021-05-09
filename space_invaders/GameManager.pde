@@ -4,13 +4,10 @@ class GameManager{
   Player player;                                                     //player variable
   ArrayList<Goblin>goblins;                                            //list containing all the goblins
   ArrayList<Arrow> arrows;                                        //list containing all the arrows
-  ArrayList<Bomb> bombs;                                            //list containing all the bombs
-  //int gameMode;                                 
-  //boolean live;                                  
+  ArrayList<Bomb> bombs;                                            //list containing all the bombs                                
   boolean bang;                                                    //whether arrow hit goblins
-  //int bbb = 0;
   int arrowcount = 65;                                           //restricting # of arrows
-  //boolean h=false;                                
+
   
   //constructor
   GameManager(){
@@ -53,6 +50,7 @@ class GameManager{
     for(Arrow b: arrows){
       for (Goblin a:goblins){
         if (b.x>a.x && b.y>a.y && b.x<a.x+30 && b.y<a.y+30){      //if the arrow hits a goblin...
+          goblinHit.play();                                       // plays the sound effect for when the goblin is hit
           arrows.remove(b);                                      //remove the arrow from the screen
           goblins.remove(a);                                       //remove the goblin from the screen
           player.score=player.score+1;                            //add 1 to the score
@@ -79,6 +77,7 @@ class GameManager{
     for (Bomb c: bombs){
       c.move();                                                                  //move the bombs
       if(c.x>player.x && c.y>player.y && c.x<player.x+50 && c.y<player.y+50){    //if the bombs hit the player...
+        playerHit.play();                                                        // plays the sound effect for when the player is hit
         bombs.remove(c);                                                         //remove the bomb from the screen
         player.lives=player.lives-1;                                             //remove a life
         break;

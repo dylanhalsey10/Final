@@ -2,15 +2,17 @@
 
 //initializing variables
 GameManager game;                                      
-//import ddf.minim.*;                                  //importing sound library
+import processing.sound.*;                                 //importing sound library
 
-//AudioPlayer music ;
-//Minim minim;
+
 PImage startscreen;                                  //what the startscreen will look like                           
 PImage gameover;                                     //what the game over will look like
 PImage background;                                   //what the backdrop of the game will look like
 PImage win;                                          //what winning screen will look like
 int outcome = 0;                                     //to check what mode the game is in (start, play, win, or lose)
+SoundFile music;                                     //instantiate music
+SoundFile playerHit;
+SoundFile goblinHit;
 
 void setup(){
   size(1000,800);                                    //window
@@ -19,8 +21,11 @@ void setup(){
   gameover = loadImage("gameover.jpg");
   background = loadImage("backgound.png");
   win = loadImage("win.png");
-  //minim = new Minim(this);                           //loading and instantiating music file 
-  //music = minim.loadFile("music.mp3");
+  music = new SoundFile(this,"music.mp3");
+  playerHit = new SoundFile(this,"playerHit.mp3");
+  goblinHit = new SoundFile(this,"goblinHit.mp3");
+  music.amp(.1);                                     // set music volume
+  music.play();                                      // play music
   
 }
 
@@ -40,7 +45,6 @@ void draw(){
   }
   else if (outcome==1){                               //when enter is pressed start this game code
   background(background);
-  //music.play();                                       //play the music
   game.update();
   game.render();
   }
